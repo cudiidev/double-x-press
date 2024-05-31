@@ -27,14 +27,15 @@
         <div class="number-column-cards">
           @for (pair of numberPair.value; track pair) {
             <mat-card>
-              <mat-card-header>
+              <mat-card-content>
                 <mat-card-title style="text-align: center">
                   {{ numberPair.key }}-{{ pair }}
                 </mat-card-title>
                 <mat-card-subtitle style="text-align: center">
                   {{ numbersGenerated[numberPair.key - 1] }}{{ numbersGenerated[pair - 1] }}
                 </mat-card-subtitle>
-              </mat-card-header>
+                <mat-card-footer></mat-card-footer>
+              </mat-card-content>
             </mat-card>
           }
         </div>

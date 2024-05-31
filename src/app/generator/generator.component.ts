@@ -3,7 +3,14 @@ import {MatError, MatFormField, MatLabel} from '@angular/material/form-field';
 import {MatInput} from '@angular/material/input';
 import {MatButton} from '@angular/material/button';
 import {FormsModule} from '@angular/forms';
-import {MatCard, MatCardHeader, MatCardSubtitle, MatCardTitle} from '@angular/material/card';
+import {
+  MatCard,
+  MatCardContent,
+  MatCardFooter,
+  MatCardHeader,
+  MatCardSubtitle,
+  MatCardTitle
+} from '@angular/material/card';
 import {KeyValuePipe} from '@angular/common';
 
 @Component({
@@ -20,14 +27,15 @@ import {KeyValuePipe} from '@angular/common';
     MatCardTitle,
     MatCardSubtitle,
     KeyValuePipe,
-    MatError
+    MatError,
+    MatCardFooter,
+    MatCardContent
   ],
   templateUrl: './generator.component.html',
   styleUrl: './generator.component.css'
 })
 export class GeneratorComponent {
 
-  // TODO en rouge le numéro du dessous
   // TODO en liste en dessous
   // TODO listes configurables
 
@@ -38,17 +46,17 @@ export class GeneratorComponent {
   outOfRangeNumbers = false;
 
   pairs: Map<number, Array<number>> = new Map([
-    [1, [8, 9, 10, 13, 14, 16]],
-    [2, [7, 8, 9, 10, 12, 13]],
+    [1, [7, 8, 9, 10, 13, 14, 16]],
+    [2, [7, 8, 9, 10, 12]],
     [3, [8, 9, 10, 11, 12, 13, 14]],
-    [4, [9, 10, 12, 16]],
-    [5, [5, 10, 12, 13]],
+    [4, [9, 10, 13]],
+    [5, [11, 12, 13]],
     [6, [8, 9, 12, 13, 14]],
     [7, [8, 10, 12]],
-    [8, [9, 11, 12, 13, 16]],
+    [8, [9, 11, 12, 16]],
     [9, [15, 16]],
-    [10, [12, 16]],
-    [11, [12, 15]],
+    [10, [12, 13]],
+    [11, [12, 13, 14]],
     [14, [15, 16]]
   ]);
 
@@ -61,7 +69,7 @@ export class GeneratorComponent {
       this.missingFields = false;
       this.duplicateNumbers = true;
       this.outOfRangeNumbers = false;
-    } else if(this.numbersContainOutOfRange()) {
+    } else if (this.numbersContainOutOfRange()) {
       this.outOfRangeNumbers = true;
       this.missingFields = false;
       this.duplicateNumbers = false;
