@@ -21,7 +21,9 @@
     <mat-error class="error-label">Veuillez saisir des nombres compris entre 1 et 16</mat-error>
   }
 
-  @if (numbersGenerated.length) {
+  <p class="line-result">{{ lineResult() }}</p>
+
+  @if (numbersGenerated().length) {
     <div class="line-cards-columns">
       @for (numberPair of pairs | keyvalue; track numberPair) {
         <div class="number-column-cards">
@@ -32,7 +34,7 @@
                   {{ numberPair.key }}-{{ pair }}
                 </mat-card-title>
                 <mat-card-subtitle style="text-align: center">
-                  {{ numbersGenerated[numberPair.key - 1] }}{{ numbersGenerated[pair - 1] }}
+                  {{ numbersGenerated()[numberPair.key - 1] }}{{ numbersGenerated()[pair - 1] }}
                 </mat-card-subtitle>
                 <mat-card-footer></mat-card-footer>
               </mat-card-content>

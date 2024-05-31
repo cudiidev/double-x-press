@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, computed, signal} from '@angular/core';
 import {MatError, MatFormField, MatLabel} from '@angular/material/form-field';
 import {MatInput} from '@angular/material/input';
 import {MatButton} from '@angular/material/button';
@@ -40,7 +40,7 @@ export class GeneratorComponent {
   // TODO listes configurables
 
   numbers = new Array<number>(16);
-  numbersGenerated: Array<number> = [];
+  numbersGenerated = signal<number[]>([]);
   missingFields = false;
   duplicateNumbers = false;
   outOfRangeNumbers = false;
@@ -60,6 +60,18 @@ export class GeneratorComponent {
     [14, [15, 16]]
   ]);
 
+  lineResult = computed(() => {
+    const results: string[] = [];
+    if (this.numbersGenerated().length === 16) {
+      this.pairs.forEach((pair, index) => {
+        pair.forEach((num) => {
+          results.push(this.numbersGenerated()[index - 1].toString() + this.numbersGenerated()[num - 1].toString());
+        })
+      })
+    }
+    return results.join(', ');
+  });
+
   public generateGrid() {
     if (this.numbersMissing()) {
       this.missingFields = true;
@@ -76,7 +88,7 @@ export class GeneratorComponent {
     } else {
       this.missingFields = false;
       this.duplicateNumbers = false;
-      this.numbersGenerated = [...this.numbers];
+      this.numbersGenerated.set([...this.numbers]);
     }
   }
 
