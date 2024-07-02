@@ -5,6 +5,14 @@
   display: flex;
   flex-direction: row;
   gap: 5px;
+
+  mat-label {
+    color: white !important;
+  }
+
+  input {
+    color: white !important;
+  }
 }
 
 input::-webkit-outer-spin-button,
@@ -18,13 +26,14 @@ input::-webkit-inner-spin-button {
 }
 
 ::ng-deep .mat-mdc-unelevated-button:not(:disabled) {
-  background-color: #CCD5AE !important;
+  background-color: #748D92 !important;
   height: 56px;
   width: inherit;
 }
 
 ::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled) {
-  background-color: #FAEDCD !important;
+  background-color: #124E66 !important;
+  color: white !important;
 }
 
 .line-cards-columns {
@@ -36,6 +45,7 @@ input::-webkit-inner-spin-button {
   justify-content: flex-start;
   flex-wrap: wrap;
   gap: 50px;
+  padding-bottom: 50px;
 }
 
 .number-column-cards {
@@ -59,7 +69,7 @@ input::-webkit-inner-spin-button {
 }
 
 .mat-mdc-card-subtitle {
-  color: red;
+  color: #D2122E;
   font-size: 2rem;
 }
 
@@ -71,4 +81,14 @@ input::-webkit-inner-spin-button {
   white-space: break-spaces;
   width: 80%;
   margin: auto;
+  color: white;
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.23);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(7.8px);
+  -webkit-backdrop-filter: blur(7.8px);
+  border: 1px solid rgba(255, 255, 255, 0.32);
 }

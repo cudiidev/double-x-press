@@ -3,7 +3,7 @@
     @for (item of numbers; track item; let index = $index) {
       <mat-form-field>
         <mat-label>{{ index + 1 }}</mat-label>
-        <input matInput maxlength="2" type="number" (change)="updateArray($event, index)" [value]="numbers[index]">
+        <input class matInput maxlength="2" type="number" (change)="updateArray($event, index)" [value]="numbers[index]">
       </mat-form-field>
     }
 
@@ -28,13 +28,13 @@
       @for (numberPair of pairs | keyvalue; track numberPair) {
         <div class="number-column-cards">
           @for (pair of numberPair.value; track pair) {
-            <mat-card>
+            <mat-card class="glass-card">
               <mat-card-content>
                 <mat-card-title style="text-align: center">
                   {{ numberPair.key }}-{{ pair }}
                 </mat-card-title>
                 <mat-card-subtitle style="text-align: center">
-                  {{ numbersGenerated()[numberPair.key - 1] }}{{ numbersGenerated()[pair - 1] }}
+                  {{ numbersGenerated()[numberPair.key - 1] }}-{{ numbersGenerated()[pair - 1] }}
                 </mat-card-subtitle>
                 <mat-card-footer></mat-card-footer>
               </mat-card-content>
