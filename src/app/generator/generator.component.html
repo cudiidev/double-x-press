@@ -10,12 +10,13 @@
 
     <button class="valid-button" mat-flat-button (click)="generateGrid()">Générer</button>
   </div>
-  <div class="input-numbers-buttons hide-print">
-    <button mat-flat-button (click)="printListCards(true, false)">Imprimer liste</button>
-    <button mat-flat-button (click)="printListCards(false, true)">Imprimer cartes</button>
-    <button mat-flat-button (click)="printListCards(false, false)">Imprimer liste + cartes</button>
-  </div>
-
+  @if (numbersGenerated().length) {
+    <div class="input-numbers-buttons hide-print">
+      <button mat-flat-button (click)="printListCards(true, false)">Imprimer liste</button>
+      <button mat-flat-button (click)="printListCards(false, true)">Imprimer cartes</button>
+      <button mat-flat-button (click)="printListCards(false, false)">Imprimer liste + cartes</button>
+    </div>
+  }
 
   @if (missingFields) {
     <mat-error class="error-label">Veuillez renseigner les 16 nombres</mat-error>
