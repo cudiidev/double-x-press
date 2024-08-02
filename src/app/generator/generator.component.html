@@ -1,13 +1,19 @@
 <div class="container">
-  <div class="input-numbers-line">
+  <div class="input-numbers-line hide-print">
     @for (item of numbers; track item; let index = $index) {
       <mat-form-field>
         <mat-label>{{ index + 1 }}</mat-label>
-        <input class matInput maxlength="2" type="number" (change)="updateArray($event, index)" [value]="numbers[index]">
+        <input class matInput maxlength="2" type="number" (change)="updateArray($event, index)"
+               [value]="numbers[index]">
       </mat-form-field>
     }
 
     <button class="valid-button" mat-flat-button (click)="generateGrid()">Générer</button>
+  </div>
+  <div class="input-numbers-buttons hide-print">
+    <button mat-flat-button (click)="printListCards(true, false)">Imprimer liste</button>
+    <button mat-flat-button (click)="printListCards(false, true)">Imprimer cartes</button>
+    <button mat-flat-button (click)="printListCards(false, false)">Imprimer liste + cartes</button>
   </div>
 
 
@@ -21,16 +27,19 @@
     <mat-error class="error-label">Veuillez saisir des nombres compris entre 1 et 16</mat-error>
   }
 
-  <p class="line-result">{{ lineResult() }}</p>
 
-  @if (numbersGenerated().length) {
+  @if (!cardsPrinting) {
+    <p class="line-result">{{ lineResult() }}</p>
+  }
+
+  @if (numbersGenerated().length && !listPrinting) {
     <div class="line-cards-columns">
       @for (numberPair of pairs | keyvalue; track numberPair) {
         <div class="number-column-cards">
           @for (pair of numberPair.value; track pair) {
             <mat-card class="glass-card">
               <mat-card-content>
-                <mat-card-title style="text-align: center">
+                <mat-card-title style="text-align: center" class="hide-print">
                   {{ numberPair.key }}-{{ pair }}
                 </mat-card-title>
                 <mat-card-subtitle style="text-align: center">

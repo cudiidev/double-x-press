@@ -40,10 +40,12 @@ export class GeneratorComponent {
   // TODO listes configurables
 
   numbers = new Array<number>(16);
-  numbersGenerated = signal<number[]>([]);
+  numbersGenerated = signal<number[]>([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]);
   missingFields = false;
   duplicateNumbers = false;
   outOfRangeNumbers = false;
+  listPrinting = false;
+  cardsPrinting = false;
 
   pairs: Map<number, Array<number>> = new Map([
     [1, [7, 8, 9, 10, 13, 14, 16]],
@@ -118,5 +120,17 @@ export class GeneratorComponent {
       }
     });
     return containOutOfRange;
+  }
+
+  public printListCards(isList: boolean, isCards: boolean) {
+    this.listPrinting = isList;
+    this.cardsPrinting = isCards;
+    setTimeout(() => {
+      window.print();
+    }, 1000)
+    setTimeout(() => {
+      this.listPrinting = false;
+      this.cardsPrinting = false;
+    }, 2000)
   }
 }
