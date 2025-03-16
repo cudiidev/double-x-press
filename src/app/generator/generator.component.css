@@ -108,3 +108,10 @@ input::-webkit-inner-spin-button {
     display: none !important;
   }
 }
+
+
+.button-big-p {
+  font-size: 24px !important;
+  line-height: 24px !important;
+}
+

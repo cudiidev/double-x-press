@@ -3,14 +3,7 @@ import {MatError, MatFormField, MatLabel} from '@angular/material/form-field';
 import {MatInput} from '@angular/material/input';
 import {MatButton} from '@angular/material/button';
 import {FormsModule} from '@angular/forms';
-import {
-  MatCard,
-  MatCardContent,
-  MatCardFooter,
-  MatCardHeader,
-  MatCardSubtitle,
-  MatCardTitle
-} from '@angular/material/card';
+import {MatCard, MatCardContent, MatCardFooter, MatCardSubtitle, MatCardTitle} from '@angular/material/card';
 import {KeyValuePipe} from '@angular/common';
 
 @Component({
@@ -23,7 +16,6 @@ import {KeyValuePipe} from '@angular/common';
     MatButton,
     FormsModule,
     MatCard,
-    MatCardHeader,
     MatCardTitle,
     MatCardSubtitle,
     KeyValuePipe,
@@ -48,18 +40,21 @@ export class GeneratorComponent {
   cardsPrinting = false;
 
   pairs: Map<number, Array<number>> = new Map([
-    [1, [7, 8, 9, 10, 13, 14, 16]],
-    [2, [7, 8, 9, 10, 12]],
-    [3, [8, 9, 10, 11, 12, 13, 14]],
-    [4, [9, 10, 13]],
-    [5, [11, 12, 13]],
-    [6, [8, 9, 12, 13, 14]],
-    [7, [8, 10, 12]],
-    [8, [9, 11, 12, 16]],
-    [9, [15, 16]],
-    [10, [12, 13]],
-    [11, [12, 13, 14]],
-    [14, [15, 16]]
+    [1, [8, 9, 10, 11, 13, 14, 15]],
+    [2, [8, 9, 10, 11, 12, 13, 14, 15]],
+    [3, [8, 9, 10, 11, 12, 13, 14, 15]],
+    [4, [8, 9, 10, 12, 13, 15]],
+    [5, [8, 9, 10, 11, 12, 13]],
+    [6, [8, 9, 10, 12, 13, 14, 15]],
+    [7, [8, 9, 11, 12, 13]],
+    [8, [9, 11, 12, 13, 14]],
+    [9, [12, 13, 16]],
+    [10, [11, 12, 13, 15]],
+    [11, [12, 13, 14, 15, 16]],
+    [12, [13, 16]],
+    [13, [14,15,16]],
+    [14, [15, 16]],
+    [15, [16]]
   ]);
 
   lineResult = computed(() => {
