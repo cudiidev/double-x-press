@@ -1,59 +1,73 @@
 <div class="container">
-  <div class="input-numbers-line hide-print">
-    @for (item of numbers; track item; let index = $index) {
-      <mat-form-field>
-        <mat-label>{{ index + 1 }}</mat-label>
-        <input class matInput maxlength="2" type="number" (change)="updateArray($event, index)"
-               [value]="numbers[index]">
-      </mat-form-field>
+  @if (choice()) {
+
+    <div class="input-numbers-line hide-print">
+      @for (item of numbers; track item; let index = $index) {
+        <mat-form-field>
+          <mat-label>{{ index + 1 }}</mat-label>
+          <input class matInput maxlength="2" type="number" (change)="updateArray($event, index)"
+                 [value]="numbers[index]">
+        </mat-form-field>
+      }
+
+      <button class="valid-button button-big-p" mat-flat-button (click)="generateGrid()">Générer</button>
+    </div>
+    @if (numbersGenerated().length) {
+      <div class="input-numbers-buttons hide-print">
+        <button class="button-big-p" mat-flat-button (click)="printListCards(true)">Imprimer original</button>
+        <button class="button-big-p" mat-flat-button (click)="printListCards(false)">Imprimer sans référence</button>
+      </div>
     }
 
-    <button class="valid-button" mat-flat-button (click)="generateGrid()">Générer</button>
+    @if (missingFields) {
+      <mat-error class="error-label">Veuillez renseigner les 16 nombres</mat-error>
+    }
+    @if (duplicateNumbers) {
+      <mat-error class="error-label">Veuillez ne pas saisir de nombre en double</mat-error>
+    }
+    @if (outOfRangeNumbers) {
+      <mat-error class="error-label">Veuillez saisir des nombres compris entre 1 et 16</mat-error>
+    }
+
+
+    @if (numbersGenerated().length) {
+      <div class="line-cards-columns">
+        @for (numberPair of pairs | keyvalue; track numberPair) {
+          <div class="number-column-cards">
+            @if (numberPair.key + 1 < choice()) {
+              <mat-card class="glass-card">
+                @for (pair of numberPair.value; track pair) {
+                  <mat-card-content>
+                    <mat-card-title>
+                      @if (pair < choice()) {
+                        {{ numberPair.key }}-{{ pair }}
+                        @if (printReference) {
+                          / {{ numbersGenerated()[numberPair.key - 1] }}-{{ numbersGenerated()[pair - 1] }}
+                        }
+                      }
+                    </mat-card-title>
+                  </mat-card-content>
+                }
+              </mat-card>
+            }
+          </div>
+        }
+      </div>
+    }
+  }
+
+  <div class="choices-line">
+    <mat-card appearance="outlined" (click)="changeNumberChoice(14)">
+      <mat-card-content>14</mat-card-content>
+    </mat-card>
+    <mat-card appearance="outlined" (click)="changeNumberChoice(15)">
+      <mat-card-content>15</mat-card-content>
+    </mat-card>
+    <mat-card appearance="outlined" (click)="changeNumberChoice(16)">
+      <mat-card-content>16</mat-card-content>
+    </mat-card>
   </div>
-  @if (numbersGenerated().length) {
-    <div class="input-numbers-buttons hide-print">
-      <button class="button-big-p" mat-flat-button (click)="printListCards(true, false)">Imprimer liste</button>
-      <button class="button-big-p" mat-flat-button (click)="printListCards(false, true)">Imprimer cartes</button>
-      <button class="button-big-p" mat-flat-button (click)="printListCards(false, false)">Imprimer liste + cartes
-      </button>
-    </div>
-  }
-
-  @if (missingFields) {
-    <mat-error class="error-label">Veuillez renseigner les 16 nombres</mat-error>
-  }
-  @if (duplicateNumbers) {
-    <mat-error class="error-label">Veuillez ne pas saisir de nombre en double</mat-error>
-  }
-  @if (outOfRangeNumbers) {
-    <mat-error class="error-label">Veuillez saisir des nombres compris entre 1 et 16</mat-error>
-  }
 
 
-  @if (!cardsPrinting) {
-    <p class="line-result">{{ lineResult() }}</p>
-  }
-
-  @if (numbersGenerated().length && !listPrinting) {
-    <div class="line-cards-columns">
-      @for (numberPair of pairs | keyvalue; track numberPair) {
-        <div class="number-column-cards">
-          @for (pair of numberPair.value; track pair) {
-            <mat-card class="glass-card">
-              <mat-card-content>
-                <mat-card-title style="text-align: center" class="hide-print">
-                  {{ numberPair.key }}-{{ pair }}
-                </mat-card-title>
-                <mat-card-subtitle style="text-align: center">
-                  {{ numbersGenerated()[numberPair.key - 1] }}-{{ numbersGenerated()[pair - 1] }}
-                </mat-card-subtitle>
-                <mat-card-footer></mat-card-footer>
-              </mat-card-content>
-            </mat-card>
-          }
-        </div>
-      }
-    </div>
-  }
 </div>
 

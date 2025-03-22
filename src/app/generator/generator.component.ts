@@ -3,7 +3,7 @@ import {MatError, MatFormField, MatLabel} from '@angular/material/form-field';
 import {MatInput} from '@angular/material/input';
 import {MatButton} from '@angular/material/button';
 import {FormsModule} from '@angular/forms';
-import {MatCard, MatCardContent, MatCardFooter, MatCardSubtitle, MatCardTitle} from '@angular/material/card';
+import {MatCard, MatCardContent, MatCardTitle} from '@angular/material/card';
 import {KeyValuePipe} from '@angular/common';
 
 @Component({
@@ -17,10 +17,8 @@ import {KeyValuePipe} from '@angular/common';
     FormsModule,
     MatCard,
     MatCardTitle,
-    MatCardSubtitle,
     KeyValuePipe,
     MatError,
-    MatCardFooter,
     MatCardContent
   ],
   templateUrl: './generator.component.html',
@@ -36,25 +34,24 @@ export class GeneratorComponent {
   missingFields = false;
   duplicateNumbers = false;
   outOfRangeNumbers = false;
-  listPrinting = false;
-  cardsPrinting = false;
+  printReference = true;
+  choice = signal<number>(0);
 
   pairs: Map<number, Array<number>> = new Map([
-    [1, [8, 9, 10, 11, 13, 14, 15]],
-    [2, [8, 9, 10, 11, 12, 13, 14, 15]],
-    [3, [8, 9, 10, 11, 12, 13, 14, 15]],
-    [4, [8, 9, 10, 12, 13, 15]],
-    [5, [8, 9, 10, 11, 12, 13]],
-    [6, [8, 9, 10, 12, 13, 14, 15]],
-    [7, [8, 9, 11, 12, 13]],
-    [8, [9, 11, 12, 13, 14]],
-    [9, [12, 13, 16]],
-    [10, [11, 12, 13, 15]],
-    [11, [12, 13, 14, 15, 16]],
-    [12, [13, 16]],
-    [13, [14,15,16]],
-    [14, [15, 16]],
-    [15, [16]]
+    [1, [9, 10, 11, 12, 13, 15]],
+    [2, [7, 8, 9, 13, 14, 15]],
+    [3, [8, 9, 10, 12, 13, 14, 15]],
+    [4, [8, 10, 11, 12, 13, 15]],
+    [5, [7, 9, 11, 14]],
+    [6, [8, 12, 13, 14, 15]],
+    [7, [8, 11, 12, 13, 14, 15]],
+    [8, [9, 10, 11, 12, 13, 15]],
+    [9, [10, 11, 12, 13]],
+    [10, [11, 13]],
+    [11, [13, 14]],
+    [12, [13, 14]],
+    [13, [14]],
+    [14, [15]]
   ]);
 
   lineResult = computed(() => {
@@ -68,6 +65,10 @@ export class GeneratorComponent {
     }
     return results.join(', ');
   });
+
+  public changeNumberChoice(choice: number) {
+    this.choice.set(choice);
+  }
 
   public generateGrid() {
     if (this.numbersMissing()) {
@@ -117,15 +118,13 @@ export class GeneratorComponent {
     return containOutOfRange;
   }
 
-  public printListCards(isList: boolean, isCards: boolean) {
-    this.listPrinting = isList;
-    this.cardsPrinting = isCards;
+  public printListCards(withReference: boolean) {
+    this.printReference = withReference;
     setTimeout(() => {
       window.print();
     }, 1000)
     setTimeout(() => {
-      this.listPrinting = false;
-      this.cardsPrinting = false;
+      this.printReference = true;
     }, 2000)
   }
 }
