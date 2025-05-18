@@ -39,11 +39,11 @@
                 @for (pair of numberPair.value; track pair) {
                   <mat-card-content>
                     <mat-card-title>
-                      @if (pair < choice()) {
-                        {{ numberPair.key }}-{{ pair }}
+                      @if (numberPair.key < choice()) {
                         @if (printReference) {
-                          / {{ numbersGenerated()[numberPair.key - 1] }}-{{ numbersGenerated()[pair - 1] }}
+                          {{ numbersGenerated()[numberPair.key - 1] }}-{{ numbersGenerated()[pair - 1] }} /
                         }
+                        {{ numberPair.key }}-{{ pair }}
                       }
                     </mat-card-title>
                   </mat-card-content>
@@ -57,14 +57,11 @@
   }
 
   <div class="choices-line hide-print">
-    <mat-card appearance="outlined" (click)="changeNumberChoice(14)">
-      <mat-card-content>14</mat-card-content>
+    <mat-card appearance="outlined" (click)="changeNumberChoice(11)">
+      <mat-card-content>77</mat-card-content>
     </mat-card>
-    <mat-card appearance="outlined" (click)="changeNumberChoice(15)">
-      <mat-card-content>15</mat-card-content>
-    </mat-card>
-    <mat-card appearance="outlined" (click)="changeNumberChoice(16)">
-      <mat-card-content>16</mat-card-content>
+    <mat-card appearance="outlined" (click)="changeNumberChoice(99)">
+      <mat-card-content>Autres</mat-card-content>
     </mat-card>
   </div>
 
