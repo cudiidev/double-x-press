@@ -3,10 +3,13 @@
 
     <div class="input-numbers-line hide-print">
       @for (item of numbers; track item; let index = $index) {
-        <mat-form-field>
-          <mat-label>{{ index + 1 }}</mat-label>
-          <input class matInput maxlength="2" type="number" (change)="updateArray($event, index)"
+        <mat-form-field matBadge="{{index + 1}}" matBadgePosition="above before" matBadgeSize="medium">
+          <input class matInput maxlength="2" type="number"
+                 (change)="updateArray($event, index)"
                  [value]="numbers[index]">
+          @if (numbersGeneratedInverted()[index]) {
+            <span class="inverted-number">{{ numbersGeneratedInverted()[index] }}</span>
+          }
         </mat-form-field>
       }
 
@@ -16,6 +19,7 @@
       <div class="input-numbers-buttons hide-print">
         <button class="button-big-p" mat-flat-button (click)="printListCards(true)">Imprimer original</button>
         <button class="button-big-p" mat-flat-button (click)="printListCards(false)">Imprimer sans référence</button>
+        <button class="button-big-p" mat-flat-button (click)="invert()">Inverser</button>
       </div>
     }
 
@@ -41,9 +45,9 @@
                     <mat-card-title>
                       @if (numberPair.key < choice()) {
                         @if (printReference) {
-                          {{ numbersGenerated()[numberPair.key - 1] }}-{{ numbersGenerated()[pair - 1] }} /
+                          {{ numberPair.key }}-{{ pair }} /
                         }
-                        {{ numberPair.key }}-{{ pair }}
+                        {{ numbersGenerated()[numberPair.key - 1] }}-{{ numbersGenerated()[pair - 1] }}
                       }
                     </mat-card-title>
                   </mat-card-content>
@@ -57,11 +61,11 @@
   }
 
   <div class="choices-line hide-print">
-    <mat-card appearance="outlined" (click)="changeNumberChoice(11)">
-      <mat-card-content>77</mat-card-content>
+    <mat-card appearance="outlined" (click)="changeNumberChoice(10)">
+      <mat-card-content>55</mat-card-content>
     </mat-card>
     <mat-card appearance="outlined" (click)="changeNumberChoice(99)">
-      <mat-card-content>Autres</mat-card-content>
+      <mat-card-content>70</mat-card-content>
     </mat-card>
   </div>
 

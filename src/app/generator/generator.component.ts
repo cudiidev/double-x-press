@@ -1,10 +1,11 @@
 import {Component, computed, signal} from '@angular/core';
-import {MatError, MatFormField, MatLabel} from '@angular/material/form-field';
+import {MatError, MatFormField} from '@angular/material/form-field';
 import {MatInput} from '@angular/material/input';
 import {MatButton} from '@angular/material/button';
 import {FormsModule} from '@angular/forms';
 import {MatCard, MatCardContent, MatCardTitle} from '@angular/material/card';
 import {KeyValuePipe} from '@angular/common';
+import {MatBadge} from "@angular/material/badge";
 
 @Component({
   selector: 'app-generator',
@@ -12,22 +13,20 @@ import {KeyValuePipe} from '@angular/common';
   imports: [
     MatFormField,
     MatInput,
-    MatLabel,
     MatButton,
     FormsModule,
     MatCard,
     MatCardTitle,
     KeyValuePipe,
     MatError,
-    MatCardContent
+    MatCardContent,
+    MatBadge
   ],
   templateUrl: './generator.component.html',
   styleUrl: './generator.component.css'
 })
 export class GeneratorComponent {
 
-  // TODO en liste en dessous
-  // TODO listes configurables
 
   numbers = new Array<number>(16);
   numbersGenerated = signal<number[]>([]);
@@ -38,33 +37,24 @@ export class GeneratorComponent {
   choice = signal<number>(0);
 
   pairs: Map<number, Array<number>> = new Map([
-    [1, [7,8,9,10,11,12,13,14,15,16]],
-    [2, [7,8,9,10,11,12,13,14,15,16]],
-    [3, [7,8,9,10,11,12,13,14,15,16]],
-    [4, [7,8,9,10,11,12,13,14,15,16]],
-    [5, [7,8,9,10,11,12,13,14,15,16]],
-    [6, [7,8,9,10,11,12,13,14,15,16]],
-    [7, [8,9,10,11,12,13,14,15,16]],
-    [8, [9,10,11,12,13,14,15,16]],
-    [9, [10,11,12,13,14,15,16]],
-    [10, [11,12,13,14,15,16]],
-    [11, [12,13,14,15,16]],
-    [12, [13,14,15,16]],
-    [13, [14,15,16]],
-    [14, [15,16]],
-    [15, [16]]
+    [1, [8, 9, 10, 11, 12, 13, 14]],
+    [2, [8, 9, 10, 11, 12, 13, 14]],
+    [3, [8, 9, 10, 11, 12, 13, 14]],
+    [4, [8, 9, 10, 11, 12, 13, 14]],
+    [5, [8, 9, 10, 11, 12, 13, 14]],
+    [6, [8, 9, 10, 11, 12, 13, 14]],
+    [7, [8, 9, 10, 11, 12, 13, 14]],
+    [8, [9, 10, 11, 12, 13, 14]],
+    [9, [10, 11, 12, 13, 14]],
+    [10, [11, 12, 13, 14]],
+    [11, [12, 13, 14]],
+    [12, [13, 14]],
+    [13, [14, 15]]
   ]);
 
-  lineResult = computed(() => {
-    const results: string[] = [];
-    if (this.numbersGenerated().length === 16) {
-      this.pairs.forEach((pair, index) => {
-        pair.forEach((num) => {
-          results.push(this.numbersGenerated()[index - 1].toString() + this.numbersGenerated()[num - 1].toString());
-        })
-      })
-    }
-    return results.join(', ');
+  numbersGeneratedInverted = computed(() => {
+    return [0, 0, this.numbersGenerated()[12], 0, this.numbersGenerated()[11], 0, this.numbersGenerated()[10],
+      0, 0, 0, this.numbersGenerated()[6], this.numbersGenerated()[4], this.numbersGenerated()[2], 0, 0, 0];
   });
 
   public changeNumberChoice(choice: number) {
@@ -127,5 +117,19 @@ export class GeneratorComponent {
     setTimeout(() => {
       this.printReference = true;
     }, 2000)
+  }
+
+  public invert() {
+    const tab = [...this.numbersGenerated()];
+    tab[2] = this.numbersGeneratedInverted()[2];
+    tab[4] = this.numbersGeneratedInverted()[4];
+    tab[6] = this.numbersGeneratedInverted()[6];
+
+    tab[10] = this.numbersGeneratedInverted()[10];
+    tab[11] = this.numbersGeneratedInverted()[11];
+    tab[12] = this.numbersGeneratedInverted()[12];
+
+    this.numbers = tab;
+    this.generateGrid();
   }
 }

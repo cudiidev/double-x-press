@@ -126,3 +126,9 @@ input::-webkit-inner-spin-button {
     background-color: #748D92 !important;
   }
 }
+
+.inverted-number {
+  background-color: red;
+  border-radius: 10px;
+  padding: 3px;
+}
