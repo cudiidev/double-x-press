@@ -49,7 +49,8 @@ export class GeneratorComponent {
     [10, [11, 12, 13, 14]],
     [11, [12, 13, 14]],
     [12, [13, 14]],
-    [13, [14, 15]]
+    [13, [14, 15]],
+    [14, [15]]
   ]);
 
   numbersGeneratedInverted = computed(() => {
