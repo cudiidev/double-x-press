@@ -4,7 +4,7 @@ import {MatInput} from '@angular/material/input';
 import {MatButton} from '@angular/material/button';
 import {FormsModule} from '@angular/forms';
 import {MatCard, MatCardContent, MatCardTitle} from '@angular/material/card';
-import {KeyValuePipe} from '@angular/common';
+import {KeyValuePipe, NgClass} from '@angular/common';
 import {MatBadge} from "@angular/material/badge";
 
 @Component({
@@ -20,7 +20,8 @@ import {MatBadge} from "@angular/material/badge";
     KeyValuePipe,
     MatError,
     MatCardContent,
-    MatBadge
+    MatBadge,
+    NgClass
   ],
   templateUrl: './generator.component.html',
   styleUrl: './generator.component.css'
@@ -35,15 +36,16 @@ export class GeneratorComponent {
   outOfRangeNumbers = false;
   printReference = true;
   choice = signal<number>(0);
+  isInverted = signal<boolean>(false)
 
   pairs: Map<number, Array<number>> = new Map([
-    [1, [8, 9, 10, 11, 12, 13, 14]],
-    [2, [8, 9, 10, 11, 12, 13, 14]],
-    [3, [8, 9, 10, 11, 12, 13, 14]],
-    [4, [8, 9, 10, 11, 12, 13, 14]],
-    [5, [8, 9, 10, 11, 12, 13, 14]],
-    [6, [8, 9, 10, 11, 12, 13, 14]],
-    [7, [8, 9, 10, 11, 12, 13, 14]],
+    [1, [9, 10, 11, 12, 13, 14]],
+    [2, [9, 10, 11, 12, 13, 14]],
+    [3, [9, 10, 11, 12, 13, 14]],
+    [4, [9, 10, 11, 12, 13, 14]],
+    [5, [9, 10, 11, 12, 13, 14]],
+    [6, [9, 10, 11, 12, 13, 14]],
+    [7, [9, 10, 11, 12, 13, 14]],
     [8, [9, 10, 11, 12, 13, 14]],
     [9, [10, 11, 12, 13, 14]],
     [10, [11, 12, 13, 14]],
@@ -132,5 +134,6 @@ export class GeneratorComponent {
 
     this.numbers = tab;
     this.generateGrid();
+    this.isInverted.update((value) => !value);
   }
 }

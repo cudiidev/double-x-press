@@ -47,7 +47,9 @@
                         @if (printReference) {
                           {{ numberPair.key }}-{{ pair }} /
                         }
+                        <span [ngClass]="{'inverted-number': numbersGeneratedInverted()[numberPair.key - 1] && isInverted()}">
                         {{ numbersGenerated()[numberPair.key - 1] }}-{{ numbersGenerated()[pair - 1] }}
+                        </span>
                       }
                     </mat-card-title>
                   </mat-card-content>
