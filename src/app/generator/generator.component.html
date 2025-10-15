@@ -7,9 +7,9 @@
           <input class matInput maxlength="2" type="number"
                  (change)="updateArray($event, index)"
                  [value]="numbers[index]">
-          @if (numbersGeneratedInverted()[index]) {
+          <!--@if (numbersGeneratedInverted()[index]) {
             <span class="inverted-number">{{ numbersGeneratedInverted()[index] }}</span>
-          }
+          }-->
         </mat-form-field>
       }
 
@@ -19,7 +19,7 @@
       <div class="input-numbers-buttons hide-print">
         <button class="button-big-p" mat-flat-button (click)="printListCards(true)">Imprimer original</button>
         <button class="button-big-p" mat-flat-button (click)="printListCards(false)">Imprimer sans référence</button>
-        <button class="button-big-p" mat-flat-button (click)="invert()">Inverser</button>
+        <!--<button class="button-big-p" mat-flat-button (click)="invert()">Inverser</button>-->
       </div>
     }
 
@@ -44,12 +44,16 @@
                   <mat-card-content>
                     <mat-card-title>
                       @if (numberPair.key < choice()) {
-                        @if (printReference) {
-                          {{ numberPair.key }}-{{ pair }} /
+                        @if (numbersGenerated()[numberPair.key - 1] && numbersGenerated()[pair - 1]) {
+                          @if (printReference) {
+                            {{ numberPair.key }}-{{ pair }}
+                          }
+                          /
+                          <span
+                            [ngClass]="{'inverted-number': numberPair.key <= 8 && pair === 13}">
+                            {{ numbersGenerated()[numberPair.key - 1] }}-{{ numbersGenerated()[pair - 1] }}
+                          </span>
                         }
-                        <span [ngClass]="{'inverted-number': numbersGeneratedInverted()[numberPair.key - 1] && isInverted()}">
-                        {{ numbersGenerated()[numberPair.key - 1] }}-{{ numbersGenerated()[pair - 1] }}
-                        </span>
                       }
                     </mat-card-title>
                   </mat-card-content>
@@ -62,11 +66,11 @@
     }
   }
 
-  <div class="choices-line hide-print">
-    <mat-card appearance="outlined" (click)="changeNumberChoice(99)">
-      <mat-card-content>65</mat-card-content>
-    </mat-card>
-  </div>
+  <!--  <div class="choices-line hide-print">
+      <mat-card appearance="outlined" (click)="changeNumberChoice(99)">
+        <mat-card-content>65</mat-card-content>
+      </mat-card>
+    </div>-->
 
 
 </div>

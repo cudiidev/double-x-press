@@ -35,7 +35,7 @@ export class GeneratorComponent {
   duplicateNumbers = false;
   outOfRangeNumbers = false;
   printReference = true;
-  choice = signal<number>(0);
+  choice = signal<number>(99);
   isInverted = signal<boolean>(false)
 
   pairs: Map<number, Array<number>> = new Map([
@@ -65,11 +65,11 @@ export class GeneratorComponent {
   }
 
   public generateGrid() {
-    if (this.numbersMissing()) {
+    /*if (this.numbersMissing()) {
       this.missingFields = true;
       this.duplicateNumbers = false;
       this.outOfRangeNumbers = false;
-    } else if (this.numbersContainDuplicates()) {
+    } else*/ if (this.numbersContainDuplicates()) {
       this.missingFields = false;
       this.duplicateNumbers = true;
       this.outOfRangeNumbers = false;
