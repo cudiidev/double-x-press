@@ -38,28 +38,24 @@
       <div class="line-cards-columns">
         @for (numberPair of pairs | keyvalue; track numberPair) {
           <div class="number-column-cards">
-            @if (numberPair.key + 1 < choice()) {
-              <mat-card class="glass-card">
-                @for (pair of numberPair.value; track pair) {
-                  <mat-card-content>
-                    <mat-card-title>
-                      @if (numberPair.key < choice()) {
-                        @if (numbersGenerated()[numberPair.key - 1] && numbersGenerated()[pair - 1]) {
-                          @if (printReference) {
-                            {{ numberPair.key }}-{{ pair }}
-                          }
-                          /
-                          <span
-                            [ngClass]="{'inverted-number': numberPair.key <= 8 && pair === 13}">
+            <mat-card class="glass-card">
+              @for (pair of numberPair.value; track pair) {
+                <mat-card-content>
+                  <mat-card-title>
+                    @if (numbersGenerated()[numberPair.key - 1] && numbersGenerated()[pair - 1]) {
+                      @if (printReference) {
+                        {{ numberPair.key }}-{{ pair }} /
+                      }
+
+                      <span
+                        [ngClass]="{'inverted-number': numberPair.key <= 8 && pair === 13}">
                             {{ numbersGenerated()[numberPair.key - 1] }}-{{ numbersGenerated()[pair - 1] }}
                           </span>
-                        }
-                      }
-                    </mat-card-title>
-                  </mat-card-content>
-                }
-              </mat-card>
-            }
+                    }
+                  </mat-card-title>
+                </mat-card-content>
+              }
+            </mat-card>
           </div>
         }
       </div>

@@ -60,16 +60,13 @@ export class GeneratorComponent {
       0, 0, 0, this.numbersGenerated()[6], this.numbersGenerated()[4], this.numbersGenerated()[2], 0, 0, 0];
   });
 
-  public changeNumberChoice(choice: number) {
-    this.choice.set(choice);
-  }
-
   public generateGrid() {
     /*if (this.numbersMissing()) {
       this.missingFields = true;
       this.duplicateNumbers = false;
       this.outOfRangeNumbers = false;
-    } else*/ if (this.numbersContainDuplicates()) {
+    } else*/
+    if (this.numbersContainDuplicates()) {
       this.missingFields = false;
       this.duplicateNumbers = true;
       this.outOfRangeNumbers = false;
