@@ -1,4 +1,4 @@
-import {Component, computed, signal} from '@angular/core';
+import {Component, computed, effect, signal} from '@angular/core';
 import {MatError, MatFormField} from '@angular/material/form-field';
 import {MatInput} from '@angular/material/input';
 import {MatButton} from '@angular/material/button';
@@ -35,10 +35,12 @@ export class GeneratorComponent {
   duplicateNumbers = false;
   outOfRangeNumbers = false;
   printReference = true;
-  choice = signal<number>(99);
+  choice = signal<number>(0);
   isInverted = signal<boolean>(false)
 
-  pairs: Map<number, Array<number>> = new Map([
+  pairs: Map<number, Array<number>> = new Map([]);
+
+  pairsGrille1: Map<number, Array<number>> = new Map([
     [1, [9, 10, 11, 12, 13, 14]],
     [2, [9, 10, 11, 12, 13, 14]],
     [3, [9, 10, 11, 12, 13, 14]],
@@ -55,10 +57,37 @@ export class GeneratorComponent {
     [14, [15]]
   ]);
 
+  pairsGrille2: Map<number, Array<number>> = new Map([
+    [1, [8, 10, 11, 12, 14]],
+    [2, [9, 10, 11, 13, 14]],
+    [3, [8, 10, 11, 12, 14]],
+    [4, [9, 10, 11, 13, 14]],
+    [5, [8, 10, 11, 12, 14]],
+    [6, [9, 10, 11, 13, 14]],
+    [7, [8, 10, 11, 12, 14]],
+    [8, [9, 10, 11, 13, 14]],
+    [9, [10, 11, 14]],
+    [10, [11, 14]],
+    [11, [12, 14]],
+    [12, [14]],
+    [13, [14, 15]],
+    [14, [15]]
+  ]);
+
   numbersGeneratedInverted = computed(() => {
     return [0, 0, this.numbersGenerated()[12], 0, this.numbersGenerated()[11], 0, this.numbersGenerated()[10],
       0, 0, 0, this.numbersGenerated()[6], this.numbersGenerated()[4], this.numbersGenerated()[2], 0, 0, 0];
   });
+
+  constructor() {
+    effect(() => {
+      if (this.choice() === 1) {
+        this.pairs = this.pairsGrille1;
+      } else if (this.choice() === 2) {
+        this.pairs = this.pairsGrille2;
+      }
+    });
+  }
 
   public generateGrid() {
     /*if (this.numbersMissing()) {

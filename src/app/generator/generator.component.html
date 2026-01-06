@@ -62,11 +62,16 @@
     }
   }
 
-  <!--  <div class="choices-line hide-print">
-      <mat-card appearance="outlined" (click)="changeNumberChoice(99)">
-        <mat-card-content>65</mat-card-content>
+  @if (!choice()) {
+    <div class="choices-line hide-print">
+      <mat-card appearance="outlined" (click)="choice.set(1)">
+        <mat-card-content>1</mat-card-content>
       </mat-card>
-    </div>-->
+      <mat-card appearance="outlined" (click)="choice.set(2)">
+        <mat-card-content>2</mat-card-content>
+      </mat-card>
+    </div>
+  }
 
 
 </div>
