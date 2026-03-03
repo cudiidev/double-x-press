@@ -34,20 +34,20 @@ export class GeneratorComponent {
   missingFields = false;
   duplicateNumbers = false;
   outOfRangeNumbers = false;
-  printReference = true;
+  printReference = signal(true);
   choice = signal<number>(0);
   isInverted = signal<boolean>(false)
 
   pairs: Map<number, Array<number>> = new Map([]);
 
   pairsGrille1: Map<number, Array<number>> = new Map([
-    [1, [9, 10, 11, 12, 13, 14]],
-    [2, [9, 10, 11, 12, 13, 14]],
-    [3, [9, 10, 11, 12, 13, 14]],
-    [4, [9, 10, 11, 12, 13, 14]],
-    [5, [9, 10, 11, 12, 13, 14]],
-    [6, [9, 10, 11, 12, 13, 14]],
-    [7, [9, 10, 11, 12, 13, 14]],
+    [1, [8, 9, 10, 11, 12, 13, 14]],
+    [2, [8, 9, 10, 11, 12, 13, 14]],
+    [3, [8, 9, 10, 11, 12, 13, 14]],
+    [4, [8, 9, 10, 11, 12, 13, 14]],
+    [5, [8, 9, 10, 11, 12, 13, 14]],
+    [6, [8, 9, 10, 11, 12, 13, 14]],
+    [7, [8, 9, 10, 11, 12, 13, 14]],
     [8, [9, 10, 11, 12, 13, 14]],
     [9, [10, 11, 12, 13, 14]],
     [10, [11, 12, 13, 14]],
@@ -139,12 +139,12 @@ export class GeneratorComponent {
   }
 
   public printListCards(withReference: boolean) {
-    this.printReference = withReference;
+    this.printReference.set(withReference);
     setTimeout(() => {
       window.print();
     }, 1000)
     setTimeout(() => {
-      this.printReference = true;
+      this.printReference.set(true);
     }, 2000)
   }
 

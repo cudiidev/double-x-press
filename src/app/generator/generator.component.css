@@ -101,6 +101,44 @@ input::-webkit-inner-spin-button {
   .hide-print {
     display: none !important;
   }
+
+  /* Fix du conteneur principal */
+  html, body {
+    width: 100% !important;
+    height: auto !important;
+    overflow: visible !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: white !important;
+  }
+
+  .container {
+    width: 100% !important;
+    height: auto !important;
+    overflow: visible !important;
+  }
+
+  /* Les cartes doivent s'étendre sur toute la largeur */
+  .line-cards-columns {
+    width: 100% !important;
+    height: auto !important;
+    overflow: visible !important;
+    flex-wrap: wrap !important;
+  }
+
+  /* Éviter les coupures dans une carte */
+  .number-column-cards,
+  .glass-card {
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+    height: auto !important;
+    overflow: visible !important;
+    /* Supprimer le backdrop-filter qui ne s'imprime pas bien */
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    background: white !important;
+    color: black !important;
+  }
 }
 
 

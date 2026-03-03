@@ -43,7 +43,7 @@
                 <mat-card-content>
                   <mat-card-title>
                     @if (numbersGenerated()[numberPair.key - 1] && numbersGenerated()[pair - 1]) {
-                      @if (printReference) {
+                      @if (printReference()) {
                         {{ numberPair.key }}-{{ pair }} /
                       }
 
